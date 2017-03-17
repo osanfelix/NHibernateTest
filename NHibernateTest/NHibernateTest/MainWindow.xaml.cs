@@ -1,8 +1,7 @@
 ﻿using System.Windows;
-
+using System.Collections.Generic;
 using NHibernateTest.Domain;
 using NHibernateTest.Repositories;
-
 
 namespace NHibernateTest
 {
@@ -17,21 +16,39 @@ namespace NHibernateTest
 		{
 			InitializeComponent();
 
-			//getTrademark();
-
 			updateGrid();
-
-
+			populateTrademarkCombo();
 		}
+
+		void populateTrademarkCombo()
+		{
+			IObjectRepository<Trademark> repository = new TrademarkRepository();
+			TrademakCombo.Items.Clear();
+			ICollection<Trademark> listt = repository.GetAll();
+			IList<int> idx = new List<int>();
+			foreach (Trademark t in repository.GetAll())
+			{
+				if (!idx.Contains(t.Id))
+				{
+					TrademakCombo.Items.Add(t.Name);
+					idx.Add(t.Id);
+				}
+			}
+		}
+		
 
 		private void button_Click(object sender, RoutedEventArgs e)
 		{
-			// Insert a product into DDBB
-			Product product = new Product { Name = NameBox.Text, Category = CategoryBox.Text };
-			//cocacola.AddProduct(product);
-			IObjectRepository<Product> repository = new ProductRepository();
+			IObjectRepository<Trademark> repository = new TrademarkRepository();
 
-			repository.Add(product);
+			Product product = new Product { Name = NameBox.Text, Category = CategoryBox.Text };
+			Trademark trademark = repository.GetByName(TrademakCombo.SelectedItem.ToString());
+
+			// Add the product into trademark
+			trademark.AddProduct(product);
+
+			// Update Trademark into DDBB
+			repository.Update(trademark);
 
 			updateGrid();
 		}
@@ -45,11 +62,24 @@ namespace NHibernateTest
 		private void getTrademark()
 		{
 			IObjectRepository<Trademark> repository = new TrademarkRepository();
-			cocacola = repository.GetByName("CocaCola");
+			cocacola = repository.GetByName("Burguer");
 
 			if(cocacola == null)
 			{
-				cocacola = new Trademark { Name = "CocaCola" };
+				cocacola = new Trademark { Name = "Burguer" };
+				repository.Add(cocacola);
+			}
+		}
+
+		private void button_Click_AddTrademark(object sender, RoutedEventArgs e)
+		{
+			IObjectRepository<Trademark> repository = new TrademarkRepository();
+			string trademark = TrademarkBox.Text;
+			if (trademark != "")
+			{
+				repository.Add(new Trademark { Name = trademark });
+				populateTrademarkCombo();
+				TrademarkBox.Clear();
 			}
 		}
 	}

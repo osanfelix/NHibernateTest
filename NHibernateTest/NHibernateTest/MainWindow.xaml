@@ -5,14 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NHibernateTest"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="459">
+        Title="MainWindow" Height="357.5" Width="648">
     <Grid>
         <Label x:Name="label" Content="Nombre" HorizontalAlignment="Left" Margin="89,45,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label_Copy" Content="Categoria" HorizontalAlignment="Left" Margin="241,45,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="NameBox" HorizontalAlignment="Left" Height="23" Margin="89,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="CategoryBox" HorizontalAlignment="Left" Height="23" Margin="241,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="AddButton" Content="Añadir" HorizontalAlignment="Left" Margin="286,120,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
-        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="89,182,0,0" VerticalAlignment="Top" Height="108" Width="272"/>
+        <Button x:Name="AddButton" Content="Añadir" HorizontalAlignment="Left" Margin="431,118,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="89,153,0,0" VerticalAlignment="Top" Height="148" Width="329"/>
+        <ComboBox x:Name="TrademakCombo" HorizontalAlignment="Left" Margin="386,74,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="label1" Content="Marca" HorizontalAlignment="Left" Margin="386,48,0,0" VerticalAlignment="Top"/>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="116" Margin="446,184,0,0" Stroke="Black" VerticalAlignment="Top" Width="168"/>
+        <Label x:Name="label2" Content="Añadir Marca" HorizontalAlignment="Left" Margin="473,194,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="addTrademarkButton" Content="Añadir" HorizontalAlignment="Left" Margin="520,263,0,0" VerticalAlignment="Top" Width="75" Click="button_Click_AddTrademark"/>
+        <TextBox x:Name="TrademarkBox" HorizontalAlignment="Left" Height="23" Margin="473,225,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>

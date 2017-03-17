@@ -7,6 +7,6 @@ namespace NHibernateTest.Domain
 		public virtual string Name { get; set; }
 		public virtual string Category { get; set; }
 		public virtual bool Discontinued { get; set; }
-		//public virtual Trademark CommercialBrand { get; set; }
+		public virtual Trademark CommercialBrand { get; set; }
 	}
 }

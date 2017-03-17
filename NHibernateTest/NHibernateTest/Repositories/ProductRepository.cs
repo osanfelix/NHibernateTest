@@ -24,7 +24,7 @@ namespace NHibernateTest.Repositories
 			using (ISession session = NHibernateHelper.OpenSession())
 			using (ITransaction transaction = session.BeginTransaction())
 			{
-				session.Update(product);
+				session.SaveOrUpdate(product);
 				transaction.Commit();
 			}
 		}

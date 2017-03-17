@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using FluentNHibernate.Mapping;
+﻿using FluentNHibernate.Mapping;
 using NHibernateTest.Domain;
 
 namespace NHibernateTest
@@ -17,7 +11,7 @@ namespace NHibernateTest
 			Map(x => x.Name).Not.Nullable();
 			Map(x => x.Category);
 			Map(x => x.Discontinued);
-			//References(x => x.CommercialBrand);
+			References(x => x.CommercialBrand).Column("CommercialBrand");
 		}
 	}
 }

@@ -9,12 +9,12 @@ namespace NHibernateTest.Repositories
 {
 	class TrademarkRepository : IObjectRepository<Trademark>
 	{
-		public void Add(Trademark product)
+		public void Add(Trademark mark)
 		{
 			using (ISession session = NHibernateHelper.OpenSession())
 			using (ITransaction transaction = session.BeginTransaction())
 			{
-				session.Save(product);
+				session.Save(mark);
 				transaction.Commit();
 			}
 		}
@@ -50,7 +50,7 @@ namespace NHibernateTest.Repositories
 			using (ISession session = NHibernateHelper.OpenSession())
 			{
 				Trademark trademark = session
-					.CreateCriteria(typeof(Product))
+					.CreateCriteria(typeof(Trademark))
 					.Add(Restrictions.Eq("Name", name))
 					.UniqueResult<Trademark>();
 				return trademark;
@@ -67,6 +67,5 @@ namespace NHibernateTest.Repositories
 				return trademarks;
 			}
 		}
-
 	}
 }

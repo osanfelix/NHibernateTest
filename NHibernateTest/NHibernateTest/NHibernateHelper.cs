@@ -22,11 +22,9 @@ namespace NHibernateTest.Repositories
 								c => c.FromConnectionStringWithKey("ConnectionString")
 							)
 						)
-						.Mappings(m =>
-	m.FluentMappings
-	  .AddFromAssemblyOf<Product>())
-						//.Mappings(m => m.FluentMappings.AddFromAssemblyOf<Product>())
-						//.Mappings(m => m.FluentMappings.AddFromAssemblyOf<Trademark>())
+						.Mappings(m => m.FluentMappings.AddFromAssemblyOf<Product>())
+						.Mappings(m => m.FluentMappings.AddFromAssemblyOf<Trademark>())
+						
 						.BuildSessionFactory();
 				}
 				return _sessionFactory;
