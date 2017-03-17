@@ -7,9 +7,9 @@ using NHibernateTest.Domain;
 
 namespace NHibernateTest.Repositories
 {
-	public class ProductRepository : IObjectRepository<Product>
+	class TrademarkRepository : IObjectRepository<Trademark>
 	{
-		public void Add(Product product)
+		public void Add(Trademark product)
 		{
 			using (ISession session = NHibernateHelper.OpenSession())
 			using (ITransaction transaction = session.BeginTransaction())
@@ -19,7 +19,7 @@ namespace NHibernateTest.Repositories
 			}
 		}
 
-		public void Update(Product product)
+		public void Update(Trademark product)
 		{
 			using (ISession session = NHibernateHelper.OpenSession())
 			using (ITransaction transaction = session.BeginTransaction())
@@ -29,55 +29,44 @@ namespace NHibernateTest.Repositories
 			}
 		}
 
-		public void Remove(Product product)
+		public void Remove(Trademark trademark)
 		{
 			using (ISession session = NHibernateHelper.OpenSession())
 			using (ITransaction transaction = session.BeginTransaction())
 			{
-				session.Delete(product);
+				session.Delete(trademark);
 				transaction.Commit();
 			}
 		}
 
-		public Product GetById(int productId)
+		public Trademark GetById(int Id)
 		{
 			using (ISession session = NHibernateHelper.OpenSession())
-				return session.Get<Product>(productId);
+				return session.Get<Trademark>(Id);
 		}
 
-		public Product GetByName(string name)
+		public Trademark GetByName(string name)
 		{
 			using (ISession session = NHibernateHelper.OpenSession())
 			{
-				Product product = session
+				Trademark trademark = session
 					.CreateCriteria(typeof(Product))
 					.Add(Restrictions.Eq("Name", name))
-					.UniqueResult<Product>();
-				return product;
+					.UniqueResult<Trademark>();
+				return trademark;
 			}
 		}
 
-		public ICollection<Product> GetByCategory(string category)
+		public ICollection<Trademark> GetAll()
 		{
 			using (ISession session = NHibernateHelper.OpenSession())
 			{
-				var products = session
-					.CreateCriteria(typeof(Product))
-					.Add(Restrictions.Eq("Category", category))
-					.List<Product>();
-				return products;
+				var trademarks = session
+					.CreateCriteria(typeof(Trademark))
+					.List<Trademark>();
+				return trademarks;
 			}
 		}
 
-		public ICollection<Product> GetAll()
-		{
-			using (ISession session = NHibernateHelper.OpenSession())
-			{
-				var products = session
-					.CreateCriteria(typeof(Product))
-					.List<Product>();
-				return products;
-			}
-		}
 	}
 }

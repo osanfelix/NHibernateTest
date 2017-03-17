@@ -11,18 +11,26 @@ namespace NHibernateTest
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		Trademark cocacola = null;
+
 		public MainWindow()
 		{
 			InitializeComponent();
 
+			//getTrademark();
+
 			updateGrid();
+
+
 		}
 
 		private void button_Click(object sender, RoutedEventArgs e)
 		{
 			// Insert a product into DDBB
 			Product product = new Product { Name = NameBox.Text, Category = CategoryBox.Text };
-			IProductRepository repository = new ProductRepository();
+			//cocacola.AddProduct(product);
+			IObjectRepository<Product> repository = new ProductRepository();
+
 			repository.Add(product);
 
 			updateGrid();
@@ -30,8 +38,19 @@ namespace NHibernateTest
 
 		private void updateGrid()
 		{
-			IProductRepository repository = new ProductRepository();
+			IObjectRepository<Product> repository = new ProductRepository();
 			dataGrid.ItemsSource = repository.GetAll();
+		}
+
+		private void getTrademark()
+		{
+			IObjectRepository<Trademark> repository = new TrademarkRepository();
+			cocacola = repository.GetByName("CocaCola");
+
+			if(cocacola == null)
+			{
+				cocacola = new Trademark { Name = "CocaCola" };
+			}
 		}
 	}
 }

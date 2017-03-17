@@ -2,14 +2,14 @@
 
 namespace NHibernateTest.Domain
 {
-	public interface IProductRepository
+	public interface IObjectRepository<T>
 	{
-		void Add(Product product);
-		void Update(Product product);
-		void Remove(Product product);
-		Product GetById(int productId);
-		Product GetByName(string name);
-		ICollection<Product> GetByCategory(string category);
-		ICollection<Product> GetAll();
+		void Add(T product);
+		void Update(T product);
+		void Remove(T product);
+		T GetById(int productId);
+		T GetByName(string name);
+		//ICollection<Product> GetByCategory(string category);
+		ICollection<T> GetAll();
 	}
 }

@@ -1,13 +1,15 @@
 ﻿using NHibernate;
 using NHibernate.Cfg;
 using NHibernateTest.Domain;
+using FluentNHibernate.Cfg;
+using FluentNHibernate.Cfg.Db;
 
 namespace NHibernateTest.Repositories
 {
 	// This class creates a session factory only the first time a client needs a new session.
 	class NHibernateHelper
 	{
-		private static ISessionFactory _sessionFactory;
+		private static ISessionFactory _sessionFactory = null;
 
 		private static ISessionFactory SessionFactory
 		{
@@ -15,10 +17,17 @@ namespace NHibernateTest.Repositories
 			{
 				if (_sessionFactory == null)
 				{
-					var configuration = new Configuration();
-					configuration.Configure();
-					configuration.AddAssembly(typeof(Product).Assembly);
-					_sessionFactory = configuration.BuildSessionFactory();
+					return Fluently.Configure().Database(
+							MySQLConfiguration.Standard.ConnectionString(
+								c => c.FromConnectionStringWithKey("ConnectionString")
+							)
+						)
+						.Mappings(m =>
+	m.FluentMappings
+	  .AddFromAssemblyOf<Product>())
+						//.Mappings(m => m.FluentMappings.AddFromAssemblyOf<Product>())
+						//.Mappings(m => m.FluentMappings.AddFromAssemblyOf<Trademark>())
+						.BuildSessionFactory();
 				}
 				return _sessionFactory;
 			}
